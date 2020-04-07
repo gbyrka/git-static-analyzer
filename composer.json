@@ -1,0 +1,25 @@
+{
+    "name": "git-static-analyzer/analyzer",
+    "description": "A static tool to analyze the history of your git repository. Generated report can be used to spot potential problems in your project",
+    "license": "MIT",
+    "require": {
+        "php": "^5.3 || ^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8.36 || ^5.7.27"
+    },
+    "autoload": {
+        "psr-4": {
+            "GitStaticAnalyzer\\": "./src"
+        }
+    },
+    "scripts": {
+        "analyse": [
+            "phpcs --standard=PSR12 -p ./src/ ./tests/ ./analyse.php --ignore=./src/template.php",
+            "php-cs-fixer --diff --dry-run fix -v"
+        ],
+        "test": [
+            "phpunit --no-configuration ./tests/"
+        ]
+    }
+}

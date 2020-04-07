@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request: ~
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  analyse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: composer require --dev friendsofphp/php-cs-fixer squizlabs/php_codesniffer
+
+      - name: Analyse
+        run: composer analyse
+
+  test:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        php-version: ['7.4']
+        include:
+          - os: ubuntu-latest
+            php-version: '5.3'
+          - os: ubuntu-latest
+            php-version: '5.4'
+          - os: ubuntu-latest
+            php-version: '5.5'
+          - os: ubuntu-latest
+            php-version: '5.6'
+          - os: ubuntu-latest
+            php-version: '7.0'
+          - os: ubuntu-latest
+            php-version: '7.1'
+          - os: ubuntu-latest
+            php-version: '7.2'
+          - os: ubuntu-latest
+            php-version: '7.3'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring
+
+      - name: Install dependencies
+        run: composer update --no-progress --no-suggest
+
+      - name: Test
+        run: composer test
