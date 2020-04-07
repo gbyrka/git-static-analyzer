@@ -130,7 +130,7 @@
 <p align="center">
     Generated with the
     <a href="https://github.com/gbyrka-fingo/git-static-analyzer" target="_blank">Git Static Analyzer</a>
-    verision <b><?php echo $version?></b>
+    version <b><?php echo $version?></b>
 </p>
 
 <div style="float: right; width: 200px">
