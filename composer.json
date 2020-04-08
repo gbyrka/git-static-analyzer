@@ -3,7 +3,8 @@
     "description": "A static tool to analyze the history of your git repository. Generated report can be used to spot potential problems in your project",
     "license": "MIT",
     "require": {
-        "php": "^5.3 || ^7.0"
+        "php": "^5.3 || ^7.0",
+        "symfony/console": "^5.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8.36 || ^5.7.27"
