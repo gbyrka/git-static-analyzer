@@ -1,0 +1,5 @@
+{
+    "main": "analyse.php",
+    "output": "build/gsa.phar",
+    "compression": "GZ"
+}
