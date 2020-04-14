@@ -5,19 +5,26 @@ namespace GitStaticAnalyzer;
 class File
 {
     private $name = '';
-
     private $commitCount;
 
-    public function __construct($contributorString)
+    public function __construct(string $name, int $commitCount)
     {
-        $contributorString = trim($contributorString);
-        $chunks = explode(' ', $contributorString);
+        $this->name = $name;
+        $this->commitCount = $commitCount;
+    }
+
+    public static function fromString($fileString)
+    {
+        $fileString = trim($fileString);
+        $chunks = explode(' ', $fileString);
 
         if (isset($chunks[1])) {
-            $this->name = $chunks[1];
+            $name = trim($chunks[1]);
         }
 
-        $this->commitCount = $chunks[0];
+        $commitCount = trim($chunks[0]);
+
+        return new static($name, $commitCount);
     }
 
     public function getName()

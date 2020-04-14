@@ -2,8 +2,12 @@
 
 namespace GitStaticAnalyzer\Helper;
 
+use GitStaticAnalyzer\Contributor;
+use GitStaticAnalyzer\File;
+
 class GitLog
 {
+
     public static function getCommitDate($lastCommit = false, $author = '')
     {
         $reverseString = $lastCommit ? '' : ' --reverse';
@@ -17,15 +21,32 @@ class GitLog
         return Utils::convertLogTimestampToDate($commitResponse);
     }
 
-    public static function getTopContributors($count)
+    public static function getTopContributors($maxResults = 50)
     {
-        return shell_exec('git shortlog -sn --no-merges | head -n ' . $count);
+        $response = shell_exec('git shortlog -sn --no-merges | head -n ' . $maxResults);
+
+        $lines = array_filter(explode(PHP_EOL, $response));
+
+        return array_map([Contributor::class, 'fromString'], $lines);
     }
 
-    public static function getPopularFileLines()
+    public static function getPopularFileLines($maxFiles = 20)
     {
         $gitLogResponse = shell_exec('git log --name-only --pretty=format: | sort | uniq -c | sort -nr');
 
-        return explode(PHP_EOL, $gitLogResponse);
+        $lines = explode(PHP_EOL, $gitLogResponse);
+        $accumulatedFiles = [];
+
+        while ($lines && $accumulatedFiles < $maxFiles) {
+            $file = File::fromString(array_shift($lines));
+
+            if (!$file->getName()) {
+                continue;
+            }
+
+            $accumulatedFiles[] = $file;
+        }
+
+        return $accumulatedFiles;
     }
 }

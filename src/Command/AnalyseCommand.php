@@ -47,36 +47,8 @@ class AnalyseCommand extends Command
         $lastCommit = GitLog::getCommitDate(true);
         $leftBoundry = $firstCommit->getTimestamp();
 
-        //get contributors
-        $contributorResponse = GitLog::getTopContributors($input->getOption('contributors-count'));
-        $lines = explode(PHP_EOL, $contributorResponse);
-        $contributors = [];
-        foreach ($lines as $line) {
-            if (strlen($line) === 0) { //to skip empty lines
-                continue;
-            }
-
-            $contributors[] = Contributor::fromString($line);
-        }
-
-        //Files edited most often
-        $lines = GitLog::getPopularFileLines();
-        $popularFiles = [];
-        $count = 0;
-        $filesCount = (int)$input->getOption('files-count');
-        foreach ($lines as $line) {
-            if ($count++ > $filesCount) {
-                break;
-            }
-
-            $popularFile = new File($line);
-
-            if (strlen($popularFile->getName()) === 0) { //to skip empty line
-                continue;
-            }
-
-            $popularFiles[] = $popularFile;
-        }
+        $contributors = GitLog::getTopContributors($input->getOption('contributors-count'));
+        $popularFiles = GitLog::getPopularFileLines();
 
         $report = $this->reportGenerator->parse('template.php', [
             'projectName' => $input->getOption('project-name'),
