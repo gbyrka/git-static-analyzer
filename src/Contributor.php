@@ -14,14 +14,31 @@ class Contributor
 
     private $lastCommit;
 
-    public function __construct($contributorString)
+    public static function fromString($contributorString)
     {
         $contributorString = trim($contributorString);
         $chunks = explode("\t", $contributorString);
-        $this->name = $chunks[1];
-        $this->commitCount = $chunks[0];
-        $this->firstCommit = GitLog::getCommitDate(false, $this->name);
-        $this->lastCommit = GitLog::getCommitDate(true, $this->name);
+
+        $name = $chunks[1];
+        $commitCount = $chunks[0];
+        $firstCommit = GitLog::getCommitDate(false, $name);
+        $lastCommit = GitLog::getCommitDate(true, $name);
+
+        return new static($name, $commitCount, $firstCommit, $lastCommit);
+    }
+
+    /**
+     * @param string $name
+     * @param int $commitCount
+     * @param \DateTime $firstCommit
+     * @param \DateTime $lastCommit
+     */
+    public function __construct($name, $commitCount, $firstCommit, $lastCommit)
+    {
+        $this->name = $name;
+        $this->commitCount = $commitCount;
+        $this->firstCommit = $firstCommit;
+        $this->lastCommit = $lastCommit;
     }
 
     public function getName()

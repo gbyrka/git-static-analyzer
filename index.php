@@ -8,8 +8,12 @@ use Symfony\Component\Console\Application;
 
 $application = new Application('Git Static Analyzer');
 
+$reportGenerator = new \GitStaticAnalyzer\Report\HtmlReportGenerator(
+    __DIR__ . DIRECTORY_SEPARATOR . 'templates'
+);
+
 $application->addCommands(array(
-    new AnalyseCommand()
+    new AnalyseCommand($reportGenerator)
 ));
 
 $application->run();
