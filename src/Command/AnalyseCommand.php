@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GitStaticAnalyzer\Command;
 
-use GitStaticAnalyzer\Contributor;
-use GitStaticAnalyzer\File;
-use GitStaticAnalyzer\Helper\GitLog;
-use GitStaticAnalyzer\Helper\Utils;
-use GitStaticAnalyzer\Report\HtmlReportGenerator;
+use GitStaticAnalyzer\Repository;
+use GitStaticAnalyzer\Utils;
+use GitStaticAnalyzer\Report\ReportParser;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,11 +18,13 @@ class AnalyseCommand extends Command
     protected static $defaultName = 'analyse';
 
     private $reportGenerator;
+    private $repository;
 
-    public function __construct(HtmlReportGenerator $reportGenerator)
+    public function __construct(ReportParser $reportGenerator, Repository $repository)
     {
         parent::__construct();
         $this->reportGenerator = $reportGenerator;
+        $this->repository = $repository;
     }
 
     protected function configure()
@@ -43,12 +45,12 @@ class AnalyseCommand extends Command
 
         chdir($input->getArgument('path'));
 
-        $firstCommit = GitLog::getCommitDate(false);
-        $lastCommit = GitLog::getCommitDate(true);
-        $leftBoundry = $firstCommit->getTimestamp();
+        $firstCommit = $this->repository->getFirstCommitDate();
+        $lastCommit = $this->repository->getLastCommitDate();
+        $leftBoundary = $firstCommit->getTimestamp();
 
-        $contributors = GitLog::getTopContributors($input->getOption('contributors-count'));
-        $popularFiles = GitLog::getPopularFileLines();
+        $contributors = $this->repository->getTopContributors((int)$input->getOption('contributors-count'));
+        $popularFiles = $this->repository->getPopularFiles((int)$input->getOption('files-count'));
 
         $report = $this->reportGenerator->parse('template.php', [
             'projectName' => $input->getOption('project-name'),
@@ -56,9 +58,9 @@ class AnalyseCommand extends Command
             'firstCommit' => $firstCommit->format('Y-m-d'),
             'lastCommit' => $lastCommit->format('Y-m-d'),
             'contributors' => $contributors,
-            'leftBoundry' => $leftBoundry,
+            'leftBoundary' => $leftBoundary,
             'width' => 100,
-            'size' => $lastCommit->getTimestamp() - $leftBoundry,
+            'size' => $lastCommit->getTimestamp() - $leftBoundary,
             'popularFiles' => $popularFiles,
             'version' => Utils::getVersion()
         ]);

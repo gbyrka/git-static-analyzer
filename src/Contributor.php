@@ -1,8 +1,8 @@
 <?php
 
-namespace GitStaticAnalyzer;
+declare(strict_types=1);
 
-use GitStaticAnalyzer\Helper\GitLog;
+namespace GitStaticAnalyzer;
 
 class Contributor
 {

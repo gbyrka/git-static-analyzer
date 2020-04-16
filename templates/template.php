@@ -140,9 +140,9 @@
                         <td><?= $contributor->getLastCommit()->format("Y-m-d") ?></td>
                         <td>
                             <?php
-                            $start = (int) (($contributor->getFirstCommit()->getTimestamp() - $leftBoundry) * $width / $size);
+                            $start = (int) (($contributor->getFirstCommit()->getTimestamp() - $leftBoundary) * $width / $size);
                             $barWidth = (int) (($contributor->getLastCommit()->getTimestamp(
-                                        ) - $leftBoundry) * $width / $size) - $start;
+                                        ) - $leftBoundary) * $width / $size) - $start;
 
                             if ($barWidth < 3) {
                                 $barWidth = 3;

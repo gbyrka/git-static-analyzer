@@ -1,10 +1,12 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace GitStaticAnalyzer\Report;
 
-class HtmlReportGenerator
+class ReportParser
 {
-    private $templateDirectory = '';
+    private $templateDirectory;
     
     public function __construct(string $templateDirectory)
     {
@@ -14,7 +16,6 @@ class HtmlReportGenerator
     public function parse(string $view, array $data = [])
     {
         extract($data);
-
         ob_start();
         include_once($this->templateDirectory . DIRECTORY_SEPARATOR . $view);
 

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GitStaticAnalyzer;
 
 class File
 {
-    private $name = '';
+    private $name;
     private $commitCount;
 
     public function __construct(string $name, int $commitCount)
@@ -18,13 +20,10 @@ class File
         $fileString = trim($fileString);
         $chunks = explode(' ', $fileString);
 
-        if (isset($chunks[1])) {
-            $name = trim($chunks[1]);
-        }
-
+        $name = isset($chunks[1]) ? trim($chunks[1]) : '';
         $commitCount = trim($chunks[0]);
 
-        return new static($name, $commitCount);
+        return new static($name, (int)$commitCount);
     }
 
     public function getName()

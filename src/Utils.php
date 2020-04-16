@@ -1,6 +1,8 @@
 <?php
 
-namespace GitStaticAnalyzer\Helper;
+declare(strict_types=1);
+
+namespace GitStaticAnalyzer;
 
 class Utils
 {
@@ -17,8 +19,7 @@ class Utils
     public static function convertLogTimestampToDate($rawTimestamp)
     {
         $timestamp = (int) (trim($rawTimestamp));
-        $dateString = "@" . $timestamp;
 
-        return new \DateTime($dateString);
+        return date_create_from_format('U', $timestamp);
     }
 }
