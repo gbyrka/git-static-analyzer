@@ -14,19 +14,6 @@ class Contributor
 
     private $lastCommit;
 
-    public static function fromString($contributorString)
-    {
-        $contributorString = trim($contributorString);
-        $chunks = explode("\t", $contributorString);
-
-        $name = $chunks[1];
-        $commitCount = $chunks[0];
-        $firstCommit = GitLog::getCommitDate(false, $name);
-        $lastCommit = GitLog::getCommitDate(true, $name);
-
-        return new static($name, $commitCount, $firstCommit, $lastCommit);
-    }
-
     /**
      * @param string $name
      * @param int $commitCount
