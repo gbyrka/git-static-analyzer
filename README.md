@@ -12,7 +12,7 @@ Generated report can be used to spot potential problems in your project
 
 ## Download
 
-Go to the [releases page](https://github.com/skrajewski/git-static-analyzer/releases) and download the newest version.
+Go to the [releases page](https://github.com/gbyrka-fingo/git-static-analyzer/releases) and download the newest version.
 
 You can also build this tool manually. See [Contribution](#contribution) for more details.
 
