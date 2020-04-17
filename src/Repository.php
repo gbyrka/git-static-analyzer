@@ -33,7 +33,7 @@ class Repository
     {
         $response = $this->dataProvider->getTopContributors($maxResults);
 
-        $lines = array_filter(explode(PHP_EOL, $response));
+        $lines = array_filter(explode("\n", $response));
 
         return array_map(function (string $contributorString) {
             $contributorString = trim($contributorString);
@@ -52,7 +52,7 @@ class Repository
     {
         $response = $this->dataProvider->getPopularFiles();
 
-        $lines = explode(PHP_EOL, $response);
+        $lines = explode("\n", $response);
         $accumulatedFiles = [];
 
         while ($lines && count($accumulatedFiles) < $maxFiles) {
