@@ -4,46 +4,43 @@ declare(strict_types=1);
 
 namespace GitStaticAnalyzer;
 
+use DateTimeImmutable;
+
 class Contributor
 {
     private $name;
-
     private $commitCount;
-
     private $firstCommit;
-
     private $lastCommit;
 
-    /**
-     * @param string $name
-     * @param int $commitCount
-     * @param \DateTime $firstCommit
-     * @param \DateTime $lastCommit
-     */
-    public function __construct($name, $commitCount, $firstCommit, $lastCommit)
-    {
+    public function __construct(
+        string $name,
+        int $commitCount,
+        DateTimeImmutable $firstCommit,
+        DateTimeImmutable $lastCommit
+    ) {
         $this->name = $name;
         $this->commitCount = $commitCount;
         $this->firstCommit = $firstCommit;
         $this->lastCommit = $lastCommit;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getCommitCount()
+    public function getCommitCount(): int
     {
         return $this->commitCount;
     }
 
-    public function getFirstCommit()
+    public function getFirstCommit(): DateTimeImmutable
     {
         return $this->firstCommit;
     }
 
-    public function getLastCommit()
+    public function getLastCommit(): DateTimeImmutable
     {
         return $this->lastCommit;
     }

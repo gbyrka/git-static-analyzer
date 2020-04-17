@@ -15,14 +15,14 @@ class Repository
         $this->dataProvider = $dataProvider;
     }
 
-    public function getFirstCommitDate(string $author = ''): \DateTime
+    public function getFirstCommitDate(string $author = ''): \DateTimeImmutable
     {
         return Utils::convertLogTimestampToDate(
             $this->dataProvider->getFirstCommitDate($author)
         );
     }
 
-    public function getLastCommitDate(string $author = ''): \DateTime
+    public function getLastCommitDate(string $author = ''): \DateTimeImmutable
     {
         return Utils::convertLogTimestampToDate(
             $this->dataProvider->getLastCommitDate($author)
@@ -40,7 +40,7 @@ class Repository
             $chunks = explode("\t", $contributorString);
 
             $name = $chunks[1];
-            $commitCount = $chunks[0];
+            $commitCount = (int)$chunks[0];
             $firstCommit = $this->getFirstCommitDate($name);
             $lastCommit = $this->getLastCommitDate($name);
 

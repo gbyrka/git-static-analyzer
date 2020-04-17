@@ -1,3 +1,19 @@
+<?php
+
+/**
+ * @var string $projectName
+ * @var string $currentDate
+ * @var string $firstCommit
+ * @var string $lastCommit
+ * @var \GitStaticAnalyzer\Contributor[] $contributors
+ * @var int $leftBoundary
+ * @var int $width
+ * @var int $size
+ * @var \GitStaticAnalyzer\File[] $popularFiles
+ * @var string $version
+ **/
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,7 +148,7 @@
                     <th onclick="sortTable(3, 'text')">To</th>
                     <th></th>
                 </tr>
-                <?php foreach ($contributors as $contributor): ?>
+                <?php foreach ($contributors as $contributor) : ?>
                     <tr>
                         <td><?= $contributor->getName() ?></td>
                         <td><?= $contributor->getCommitCount() ?></td>
@@ -140,9 +156,11 @@
                         <td><?= $contributor->getLastCommit()->format("Y-m-d") ?></td>
                         <td>
                             <?php
-                            $start = (int) (($contributor->getFirstCommit()->getTimestamp() - $leftBoundary) * $width / $size);
-                            $barWidth = (int) (($contributor->getLastCommit()->getTimestamp(
-                                        ) - $leftBoundary) * $width / $size) - $start;
+                            $firstCommitTime = $contributor->getFirstCommit()->getTimestamp();
+                            $lastCommitTime = $contributor->getLastCommit()->getTimestamp();
+
+                            $start = (int) (($firstCommitTime - $leftBoundary) * $width / $size);
+                            $barWidth = (int) (($lastCommitTime - $leftBoundary) * $width / $size) - $start;
 
                             if ($barWidth < 3) {
                                 $barWidth = 3;
@@ -168,7 +186,7 @@
                     <th>File</th>
                     <th>Commits</th>
                 </tr>
-                <?php foreach ($popularFiles as $popularFile): ?>
+                <?php foreach ($popularFiles as $popularFile) : ?>
                 <tr>
                     <td><?= $popularFile->getName() ?></td>
                     <td><?= $popularFile->getCommitCount() ?></td>
@@ -181,7 +199,7 @@
 
     <footer class="report-footer">
         <div class="report-footer__copyright">
-            <p>Generated with the <a href="https://github.com/gbyrka-fingo/git-static-analyzer" target="_blank"><strong>Git Static Analyzer</strong></a> version <strong>0.1.0</strong></p>
+            <p>Generated with the <a href="https://github.com/gbyrka-fingo/git-static-analyzer" target="_blank"><strong>Git Static Analyzer</strong></a> version <strong><?= $version ?></strong></p>
         </div>
 
         <div>

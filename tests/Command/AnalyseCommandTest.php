@@ -60,23 +60,23 @@ class AnalyseCommandTest extends TestCase
             new Contributor(
                 'Joshua Carpenter',
                 3,
-                new \DateTime('2020-04-01T12:00:00Z'),
-                new \DateTime('2020-04-08T12:00:00Z')
+                new \DateTimeImmutable('2020-04-01T12:00:00Z'),
+                new \DateTimeImmutable('2020-04-08T12:00:00Z')
             ),
             new Contributor(
                 'Robert Gonzalez',
                 2,
-                new \DateTime('2020-04-06T12:00:00Z'),
-                new \DateTime('2020-04-14T13:14:00Z')
+                new \DateTimeImmutable('2020-04-06T12:00:00Z'),
+                new \DateTimeImmutable('2020-04-14T13:14:00Z')
             ),
         ];
 
         $this->repositoryMock->expects(static::once())->method('getFirstCommitDate')->willReturn(
-            new \DateTime('2020-04-01T12:00:00Z')
+            new \DateTimeImmutable('2020-04-01T12:00:00Z')
         );
 
         $this->repositoryMock->expects(static::once())->method('getLastCommitDate')->willReturn(
-            new \DateTime('2020-04-14T13:14:00Z')
+            new \DateTimeImmutable('2020-04-14T13:14:00Z')
         );
 
         $this->repositoryMock

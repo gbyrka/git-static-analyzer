@@ -2,4 +2,5 @@
 composer.lock
 report.html
 /vendor/
+build/
 .DS_Store

@@ -13,7 +13,7 @@ class ReportParser
         $this->templateDirectory = trim($templateDirectory);
     }
 
-    public function parse(string $view, array $data = [])
+    public function parse(string $view, array $data = []): string
     {
         extract($data);
         ob_start();

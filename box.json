@@ -1,5 +1,10 @@
 {
-    "main": "analyse.php",
+    "main": "index.php",
     "output": "build/gsa.phar",
-    "compression": "GZ"
+    "compression": "GZ",
+    "force-autodiscovery": true,
+    "directories": [
+        "templates"
+    ],
+    "git-tag": "git_tag"
 }

@@ -15,7 +15,7 @@ class File
         $this->commitCount = $commitCount;
     }
 
-    public static function fromString($fileString)
+    public static function fromString(string $fileString): self
     {
         $fileString = trim($fileString);
         $chunks = explode(' ', $fileString);
@@ -26,12 +26,12 @@ class File
         return new static($name, (int)$commitCount);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getCommitCount()
+    public function getCommitCount(): int
     {
         return $this->commitCount;
     }

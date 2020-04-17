@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace GitStaticAnalyzer;
 
+use DateTimeImmutable;
+
 class Utils
 {
-    public static function getVersion()
+    /**
+     * Get version number of the tool. It's set by box tool during bundling into the PHAR package.
+     * @see https://github.com/humbug/box/blob/master/doc/configuration.md#git-tag-placeholder-git-tag
+     *
+     * @return string
+     */
+    public static function getVersion(): string
     {
-        /*
-         * cannot use constant here,
-         * visibility must be declared on all constants if project supports PHP 7.1 or later,
-         * visibility cannot be declared on constants in PHP 5
-         */
-        return '0.1.0';
+        return '@git_tag@';
     }
 
-    public static function convertLogTimestampToDate($rawTimestamp)
+    public static function convertLogTimestampToDate($rawTimestamp): DateTimeImmutable
     {
         $timestamp = (int) (trim($rawTimestamp));
 
-        return date_create_from_format('U', $timestamp);
+        return date_create_immutable_from_format('U', (string) $timestamp);
     }
 }
