@@ -68,6 +68,6 @@ class AnalyseCommand extends Command
         fwrite($file, $report);
         fclose($file);
 
-        return 1;
+        return 0;
     }
 }
