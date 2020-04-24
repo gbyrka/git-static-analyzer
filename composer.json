@@ -1,5 +1,5 @@
 {
-    "name": "fingo/git-static-analyzer",
+    "name": "git-static-analyzer/analyzer",
     "description": "A static tool to analyze the history of your git repository. Generated report can be used to spot potential problems in your project",
     "license": "MIT",
     "require": {
