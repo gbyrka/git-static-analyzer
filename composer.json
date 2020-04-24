@@ -3,23 +3,34 @@
     "description": "A static tool to analyze the history of your git repository. Generated report can be used to spot potential problems in your project",
     "license": "MIT",
     "require": {
-        "php": "^5.3 || ^7.0"
+        "php": "^7.2",
+        "symfony/console": "^5.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8.36 || ^5.7.27"
+        "phpunit/phpunit": "^7.5",
+        "squizlabs/php_codesniffer": "^3.5",
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "autoload": {
         "psr-4": {
-            "GitStaticAnalyzer\\": "./src"
+            "GitStaticAnalyzer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GitStaticAnalyzer\\Tests\\": "tests"
         }
     },
     "scripts": {
         "analyse": [
-            "phpcs --standard=PSR12 -p ./src/ ./tests/ ./analyse.php --ignore=./src/template.php",
+            "phpcs --standard=PSR12 -p ./src/ ./tests/ --ignore=./templates",
             "php-cs-fixer --diff --dry-run fix -v"
         ],
         "test": [
             "phpunit --no-configuration ./tests/"
+        ],
+        "build": [
+            "box compile"
         ]
     }
 }

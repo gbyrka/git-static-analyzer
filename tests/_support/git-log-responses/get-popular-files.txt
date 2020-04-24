@@ -1,0 +1,25 @@
+  21
+  13 src/template.php
+   3 src/Command/AnalyseCommand.php
+   3 composer.json
+   2 src/Helper/GitLog.php
+   2 src/File.php
+   2 src/Contributor.php
+   2 index.php
+   2 analyse.php
+   2 .gitignore
+   1 tests/ParametersTest.php
+   1 templates/template.php
+   1 src/Report/HtmlReportGenerator.php
+   1 src/Parameters.php
+   1 src/Helper/Utils.php
+   1 build/.gitignore
+   1 box.json
+   1 README.md
+   1 LICENSE
+   1 CODE_OF_CONDUCT.md
+   1 .php_cs
+   1 .github/workflows/ci.yml
+   1 .github/ISSUE_TEMPLATE/feature_request.md
+   1 .github/ISSUE_TEMPLATE/bug_report.md
+   1 .gitattributes

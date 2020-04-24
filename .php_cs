@@ -8,10 +8,7 @@ return PhpCsFixer\Config::create()
             ->in(__DIR__ . '/src')
             ->in(__DIR__ . '/tests')
             ->append(array(
-                __DIR__ . 'analyse.php',
+                __DIR__ . 'index.php',
                 __FILE__,
             ))
-    )
-    ->setRules(array(
-        'array_syntax' => true,
-    ));
+    );

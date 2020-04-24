@@ -1,45 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GitStaticAnalyzer;
 
-use GitStaticAnalyzer\Helper\GitLog;
+use DateTimeImmutable;
 
 class Contributor
 {
     private $name;
-
     private $commitCount;
-
     private $firstCommit;
-
     private $lastCommit;
 
-    public function __construct($contributorString)
-    {
-        $contributorString = trim($contributorString);
-        $chunks = explode("\t", $contributorString);
-        $this->name = $chunks[1];
-        $this->commitCount = $chunks[0];
-        $this->firstCommit = GitLog::getCommitDate(false, $this->name);
-        $this->lastCommit = GitLog::getCommitDate(true, $this->name);
+    public function __construct(
+        string $name,
+        int $commitCount,
+        DateTimeImmutable $firstCommit,
+        DateTimeImmutable $lastCommit
+    ) {
+        $this->name = $name;
+        $this->commitCount = $commitCount;
+        $this->firstCommit = $firstCommit;
+        $this->lastCommit = $lastCommit;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getCommitCount()
+    public function getCommitCount(): int
     {
         return $this->commitCount;
     }
 
-    public function getFirstCommit()
+    public function getFirstCommit(): DateTimeImmutable
     {
         return $this->firstCommit;
     }
 
-    public function getLastCommit()
+    public function getLastCommit(): DateTimeImmutable
     {
         return $this->lastCommit;
     }
