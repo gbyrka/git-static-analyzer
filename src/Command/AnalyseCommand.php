@@ -32,7 +32,7 @@ class AnalyseCommand extends Command
         $this
             ->setDescription('Analyse the project')
             ->addArgument('path', InputArgument::REQUIRED, 'path to the root of repository')
-            ->addOption('filename', 'f', InputOption::VALUE_OPTIONAL, '', 'report')
+            ->addOption('file-name', 'f', InputOption::VALUE_OPTIONAL, '', 'report')
             ->addOption('project-name', 'p', InputOption::VALUE_OPTIONAL, '', null)
             ->addOption('files-count', null, InputOption::VALUE_OPTIONAL, '', 20)
             ->addOption('contributors-count', null, InputOption::VALUE_OPTIONAL, '', 50)
@@ -41,7 +41,7 @@ class AnalyseCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $file = fopen($input->getOption('filename') . '.html', 'w');
+        $file = fopen($input->getOption('file-name') . '.html', 'w');
 
         chdir($input->getArgument('path'));
 

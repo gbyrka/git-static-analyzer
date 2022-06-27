@@ -98,7 +98,7 @@ class AnalyseCommandTest extends TestCase
 
         $tester->execute([
             'path' => './', // current directory
-            '--filename' => $fileName,
+            '--file-name' => $fileName,
             '--contributors-count' => $contributorsCount,
             '--files-count' => $filesCount,
             '--project-name' => $projectName
