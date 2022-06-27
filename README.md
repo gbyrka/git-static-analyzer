@@ -23,10 +23,10 @@ usage with parameters
 php index.php analyse --project-name="Project Name" --file-name="outputFileName" ../path/to/the/analyzed/git/repository/ 
 ```
 available parameters:
-- projectName
-- fileName (default "report")
-- contributorsCount (default 50)
-- filesCount (default 20)
+- project-name
+- file-name (default "report")
+- contributors-count (default 50)
+- files-count (default 20)
 
 The corresponding HTML file will be generated. You can open and check it using your web browser.
 
