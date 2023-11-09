@@ -11,6 +11,13 @@ Generated report can be used to spot potential problems in your project
 - PHP installed locally (supported versions >7.2)
 - composer https://getcomposer.org/
 
+## Installation
+
+Running following command should be the only needed thing
+```sh
+composer install
+```
+
 ## Usage
 
 basic usage

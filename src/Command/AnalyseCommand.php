@@ -17,8 +17,8 @@ class AnalyseCommand extends Command
 {
     protected static $defaultName = 'analyse';
 
-    private $reportGenerator;
-    private $repository;
+    private ReportParser $reportGenerator;
+    private Repository $repository;
 
     public function __construct(ReportParser $reportGenerator, Repository $repository)
     {
@@ -27,19 +27,19 @@ class AnalyseCommand extends Command
         $this->repository = $repository;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Analyse the project')
             ->addArgument('path', InputArgument::REQUIRED, 'path to the root of repository')
             ->addOption('file-name', 'f', InputOption::VALUE_OPTIONAL, '', 'report')
-            ->addOption('project-name', 'p', InputOption::VALUE_OPTIONAL, '', null)
+            ->addOption('project-name', 'p', InputOption::VALUE_OPTIONAL)
             ->addOption('files-count', null, InputOption::VALUE_OPTIONAL, '', 20)
             ->addOption('contributors-count', null, InputOption::VALUE_OPTIONAL, '', 50)
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $file = fopen($input->getOption('file-name') . '.html', 'w');
 

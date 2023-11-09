@@ -53,13 +53,12 @@ class GitDataProvider
         return shell_exec('git log --name-only --pretty=format: | sort | uniq -c | sort -nr');
     }
 
-    private function getCommitDate(bool $lastCommit = false, string $author = '')
+    private function getCommitDate(bool $lastCommit = false, string $author = ''): bool|string|null
     {
         $reverseString = $lastCommit ? '' : ' --reverse';
-
         $authorString = ($author === '') ? '' : ' --author="' . $author . '"';
 
-        return  shell_exec(
+        return shell_exec(
             'git log --pretty=format:"%ad%" --date=raw' . $authorString . $reverseString . ' | head -n 1'
         );
     }

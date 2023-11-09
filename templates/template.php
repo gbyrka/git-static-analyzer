@@ -5,13 +5,15 @@
  * @var string $currentDate
  * @var string $firstCommit
  * @var string $lastCommit
- * @var \GitStaticAnalyzer\Contributor[] $contributors
+ * @var Contributor[] $contributors
  * @var int $leftBoundary
  * @var int $width
  * @var int $size
  * @var \GitStaticAnalyzer\File[] $popularFiles
  * @var string $version
  **/
+
+use GitStaticAnalyzer\Contributor;
 
 ?>
 <!DOCTYPE html>
@@ -33,7 +35,7 @@
 
         table, th, td {
             padding: 10px;
-            border: 1px solid gray;
+            border: 1px solid rgb(128, 128, 128);
             border-collapse: collapse;
             font-size: 12px;
         }
@@ -69,10 +71,6 @@
             flex: 1;
         }
 
-        .company-logo {
-            margin: 1em 0;
-        }
-
         .table--full-width {
             width: 100%;
         }
@@ -85,7 +83,7 @@
     </style>
     <script>
         function sortTable(column, type) {
-            var table, rows, switching, i, x, y, shouldSwitch;
+            let table, rows, switching, i, x, y, shouldSwitch;
             table = document.getElementById("contributors");
             switching = true;
 
@@ -159,8 +157,8 @@
                             $firstCommitTime = $contributor->getFirstCommit()->getTimestamp();
                             $lastCommitTime = $contributor->getLastCommit()->getTimestamp();
 
-                            $start = (int) (($firstCommitTime - $leftBoundary) * $width / $size);
-                            $barWidth = (int) (($lastCommitTime - $leftBoundary) * $width / $size) - $start;
+                            $start = (int)(($firstCommitTime - $leftBoundary) * $width / $size);
+                            $barWidth = (int)(($lastCommitTime - $leftBoundary) * $width / $size) - $start;
 
                             if ($barWidth < 3) {
                                 $barWidth = 3;
@@ -199,7 +197,13 @@
 
     <footer class="report-footer">
         <div class="report-footer__copyright">
-            <p>Generated with the <a href="https://github.com/gbyrka/git-static-analyzer" target="_blank"><strong>Git Static Analyzer</strong></a> version <strong>0.2.0</strong></p>
+            <p>Generated with the
+                <a href="https://github.com/gbyrka/git-static-analyzer" target="_blank">
+                    <strong>Git Static Analyzer</strong>
+                </a>
+                version
+                <strong>0.3.0</strong>
+            </p>
         </div>
     </footer>
 

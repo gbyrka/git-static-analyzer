@@ -6,8 +6,7 @@ namespace GitStaticAnalyzer\Report;
 
 class ReportParser
 {
-    private $templateDirectory;
-    
+    private string $templateDirectory;
     public function __construct(string $templateDirectory)
     {
         $this->templateDirectory = trim($templateDirectory);

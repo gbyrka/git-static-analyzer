@@ -8,10 +8,10 @@ use DateTimeImmutable;
 
 class Contributor
 {
-    private $name;
-    private $commitCount;
-    private $firstCommit;
-    private $lastCommit;
+    private string $name;
+    private int $commitCount;
+    private DateTimeImmutable $firstCommit;
+    private DateTimeImmutable $lastCommit;
 
     public function __construct(
         string $name,

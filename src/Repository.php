@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace GitStaticAnalyzer;
 
+use DateTimeImmutable;
 use GitStaticAnalyzer\DataProvider\GitDataProvider;
 
 class Repository
 {
-    private $dataProvider;
+    private GitDataProvider $dataProvider;
 
     public function __construct(GitDataProvider $dataProvider)
     {
         $this->dataProvider = $dataProvider;
     }
 
-    public function getFirstCommitDate(string $author = ''): \DateTimeImmutable
+    public function getFirstCommitDate(string $author = ''): DateTimeImmutable
     {
         return Utils::convertLogTimestampToDate(
             $this->dataProvider->getFirstCommitDate($author)
         );
     }
 
-    public function getLastCommitDate(string $author = ''): \DateTimeImmutable
+    public function getLastCommitDate(string $author = ''): DateTimeImmutable
     {
         return Utils::convertLogTimestampToDate(
             $this->dataProvider->getLastCommitDate($author)

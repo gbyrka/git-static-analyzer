@@ -6,8 +6,8 @@ namespace GitStaticAnalyzer;
 
 class File
 {
-    private $name;
-    private $commitCount;
+    private string $name;
+    private int $commitCount;
 
     public function __construct(string $name, int $commitCount)
     {
